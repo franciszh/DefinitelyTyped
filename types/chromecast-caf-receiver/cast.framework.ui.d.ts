@@ -1,5 +1,5 @@
 import { PlayerDataEventType } from "./cast.framework.ui";
-import { MediaMetadata } from "./cast.framework.messages";
+import { MediaMetadata, MediaInformation, LiveSeekableRange } from "./cast.framework.messages";
 import { PlayerDataChangedEventHandler } from "./index";
 
 export = cast.framework.ui;
@@ -120,6 +120,11 @@ declare namespace cast.framework.ui {
         displayStatus: boolean;
 
         /**
+         * Property to differentiate between different screen types. TV is default.
+         */
+        displayType: string;
+
+        /**
          * Media duration in seconds; Or break duration if playing break.
          */
         duration: number;
@@ -143,6 +148,23 @@ declare namespace cast.framework.ui {
          * Indicate the player is seeking (can be either during playing or pausing).
          */
         isSeeking: boolean;
+
+        /**
+         * Indicate the seekable range of the content if it is a live stream.
+         */
+        liveSeekableRange: LiveSeekableRange | null;
+
+        /**
+         * Current media information
+         */
+        media: MediaInformation | undefined;
+
+        /**
+         * Indicates absolute time (Epoch time in seconds) for live streams. 
+         * For live event it would be the time the event started, 
+         * otherwise it will be start of the seekable range when the streaming started.
+         */
+        mediaStartAbsoluteTime: number | null;
 
         /**
          * Media metadata.
@@ -175,9 +197,24 @@ declare namespace cast.framework.ui {
         preloadingNext: boolean;
 
         /**
+         * Indicate the section duration in seconds.
+         */
+        sectionDuration : number | null;
+
+        /**
+         * Indicate the section start time, in media time in seconds.
+         */
+        sectionStartTimeInMedia: number | null;
+
+        /**
          * Current player state.
          */
         state: State;
+
+        /**
+         * The commands supported by this player.
+         */
+        supportedMediaCommands: number;
 
         /**
          * Content thumbnail url.
