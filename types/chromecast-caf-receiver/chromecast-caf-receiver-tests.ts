@@ -27,7 +27,9 @@ import {
     BreakClip,
     LoadRequestData,
     Track,
-    MediaMetadata
+    MediaMetadata,
+    LiveSeekableRange,
+    MediaInformation
 } from "chromecast-caf-receiver/cast.framework.messages";
 
 const breaksEvent = new BreaksEvent('BREAK_STARTED');
@@ -91,17 +93,24 @@ const pData: PlayerData = {
     currentBreakClipNumber: 2,
     currentTime: 1234,
     displayStatus: true,
+    displayType: "type",
     duration: 222,
     isBreakSkippable: false,
     isLive: true,
     isPlayingBreak: false,
     isSeeking: true,
+    liveSeekableRange : new LiveSeekableRange(12, 20),
+    media: undefined,
+    mediaStartAbsoluteTime: 123,
     metadata: new MediaMetadata("GENERIC"),
     nextSubtitle: "sub",
     nextThumbnailUrl: "url",
     nextTitle: "title",
     numberBreakClips: 3,
     preloadingNext: false,
+    sectionDuration: 321,
+    sectionStartTimeInMedia: 111,
+    supportedMediaCommands: 222,
     state: "paused",
     thumbnailUrl: "url",
     title: "title",
